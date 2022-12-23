@@ -1,0 +1,42 @@
+<div>
+  <header>
+    <p>{{weekDay(index)}}</p>
+    <button mat-button (click)="add()" type="button">
+      <mat-icon >add</mat-icon>
+    </button>
+  </header>
+  
+  <section *ngFor="let t of data">
+    <mat-form-field appearance="fill">
+      <mat-label>Hora inicial</mat-label>
+      <input 
+        type="text" 
+        matInput 
+        required
+        [(ngModel)]="t.start"
+        mask="00:00"
+        [showMaskTyped]="true"
+        >
+
+      <mat-hint>HH:MM</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Hora Final</mat-label>
+      <input 
+        type="text" 
+        matInput 
+        required
+        [(ngModel)]="t.end"
+        mask="00:00"
+        [showMaskTyped]="true"
+
+        >
+      <mat-hint>HH:MM</mat-hint>
+    </mat-form-field>
+    <button mat-button (click)="remove(t)" type="button">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </section>
+  
+</div>
+<mat-divider></mat-divider>

@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* html,
+body {
+  height: 100%;
+} */
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: rgb(236, 236, 236);
+}
+
+.container-row {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h3 {
+  line-height: 34px !important;
+  margin: 0 !important;
+}
+
+h4 {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+mat-form-field {
+  /* width: 100%; */
+  padding-bottom: 2em;
+  display: block !important;
+}
+
+
+/*Badge do calendário, para indicar os dias que possuem horários disponíveis*/
+button.slot_available .mat-calendar-body-cell-content::after {
+  position: absolute;
+  content: "";
+  width: 30%;
+  height: 10%;
+  background-color: indigo;
+  border-radius: 50%;
+  bottom: 0.25rem;
+  top: unset;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+  z-index: 1;
+}
+
+button.slot_available.mat-calendar-body-active .mat-calendar-body-cell-content:not(.mat-calendar-body-today)::after,
+button.slot_available.mat-calendar-body-active .mat-calendar-body-cell-content.mat-calendar-body-today.mat-calendar-body-selected::after {
+  background-color: white;
+}

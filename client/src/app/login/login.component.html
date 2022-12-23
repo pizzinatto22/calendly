@@ -1,0 +1,44 @@
+<div class="container-row">
+  <form action="" (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Acesso ao sistema</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input 
+                matInput 
+                placeholder="Usuário" 
+                required
+                [(ngModel)]="dados.username"
+                name="usuario">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input 
+                matInput 
+                placeholder="Senha" 
+                type="password" 
+                required
+                [(ngModel)]="dados.password"
+                name="senha">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button 
+        color="primary" 
+        [disabled]="!f.valid"
+        type="submit"
+        mat-raised-button>Login</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

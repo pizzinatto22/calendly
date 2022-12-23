@@ -1,0 +1,18 @@
+<mat-tab-group [selectedIndex]="1">
+  
+  <mat-tab label="Agendamentos"> 
+    <div class="space">
+      <app-schedule></app-schedule>
+    </div> 
+  </mat-tab>
+  <mat-tab label="Agenda">
+    <div class="space">
+      <app-client-schedule></app-client-schedule>
+    </div>
+  </mat-tab>
+  <mat-tab label="Configurações">
+    <div class="space">
+      <app-config [config]="config"></app-config>
+    </div>
+  </mat-tab>
+</mat-tab-group>

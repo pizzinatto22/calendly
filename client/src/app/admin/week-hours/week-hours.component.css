@@ -1,0 +1,34 @@
+div {
+  padding: 12px;
+}
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+section {
+  padding-left: 1em;
+  padding-top: 1em;
+  display: flex;
+  column-gap: 1em;
+  flex-wrap: wrap-reverse;
+  padding-bottom: 2em;
+}
+
+section button {
+  margin-top: 1em;
+  align-self: flex-end;
+}
+
+section mat-form-field {
+  max-width: 100px;
+  min-width: 90px;
+  display: inline-flex;
+  padding-bottom: 0;
+}
+
+p {
+  margin: 0;
+  width: 100px;
+}

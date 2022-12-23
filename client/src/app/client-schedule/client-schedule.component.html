@@ -1,0 +1,129 @@
+<div class="container-row">
+  <mat-card class="card-main">
+    <mat-card-header>
+      <mat-card-title>
+        Agenda para reservas
+        <button 
+          mat-button
+          matTooltip="Atualizar horários da agenda"
+          (click)="refresh()"
+          >
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="container">
+        <div>
+          <mat-card>
+            <mat-card-header>
+              <h3>Selecione uma data</h3>
+              <button 
+                mat-button
+                matTooltip="Ir para a data de hoje"
+                (click)="today()"
+                class="ml-1"
+                >
+                <mat-icon>today</mat-icon>
+              </button>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-calendar 
+                class="calendar"
+                [(selected)]="selected"
+                [startAt]="selected"
+                [dateFilter]="filter"
+                [dateClass]="dateClass"
+                ></mat-calendar>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div>
+          <mat-card>
+            <mat-card-header>
+              <h3 *ngIf="selected">Horários</h3>
+            </mat-card-header>
+            <mat-card-content>
+              <p *ngIf="!selected; else horarios_container">Selecione uma data para visualizar os horários disponíveis</p>
+
+              <ng-template #horarios_container>
+                <div >
+                  <p *ngIf="!(currentDateSlot?.slots?.length)">Não existem horários disponíveis para a data selecionada</p>
+
+                  <div *ngIf="!!currentDateSlot" class="slots">
+                    <button 
+                      type="button" 
+                      mat-raised-button 
+                      *ngFor="let l of currentDateSlot.slots"
+                      [ngClass]="{'mat-accent': selectedHourSlot == l, 'mat-primary':selectedHourSlot != l}"
+                      (click)="selectHour(l)"
+                      >{{l}}</button>
+
+                  </div>
+
+                  <div *ngIf="selectedHourSlot" class="reservation">
+                    <h4>Dados para o agendamento às {{selectedHourSlot}}</h4>
+                    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                      <mat-form-field>
+                        <mat-label>Nome completo</mat-label>
+                        <input 
+                          type="text" 
+                          matInput
+                          name="nome"
+                          [(ngModel)]="schedule.name"
+                          required>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>E-mail</mat-label>
+                        <input 
+                          type="email" 
+                          email
+                          matInput
+                          name="email"
+                          [(ngModel)]="schedule.email"
+                          required>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Número do chamado</mat-label>
+                        <span matPrefix>Ticket# &nbsp;</span>
+                        <input 
+                          type="text" 
+                          matInput
+                          name="chamado"
+                          [(ngModel)]="schedule.ticket">
+                        <mat-hint>Geralmente no assunto ou corpo do email.</mat-hint>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Observações</mat-label>
+                        <textarea 
+                          matInput
+                          name="observacoes"
+                          [(ngModel)]="schedule.note"></textarea>
+                      </mat-form-field>
+                      <div class="actions">
+                        <button 
+                          mat-button 
+                          type="button" 
+                          (click)="cancel(f)">
+                          Cancelar
+                        </button>
+                        <button
+                          type="submit" 
+                          mat-raised-button 
+                          [disabled]="!f.valid"
+                          color="primary">Agendar</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+  
+                </div>
+              </ng-template>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

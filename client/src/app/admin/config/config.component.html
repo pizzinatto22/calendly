@@ -1,0 +1,72 @@
+<div class="container-row">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Configurações da agenda</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+        <h3>Parâmetros gerais</h3>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Período aberto para agendamento</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input 
+              matStartDate 
+              placeholder="Data inicial"
+              [(ngModel)]="config.start"
+              name="start">
+            <input 
+              matEndDate 
+              placeholder="Data final"
+              [(ngModel)]="config.end"
+              name="end">
+          </mat-date-range-input>
+          <mat-hint>(dd/mm/aaaa – dd/mm/aaaa)</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+  
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Duração de cada evento</mat-label>
+          <input 
+            type="number" 
+            matInput
+            [(ngModel)]="config.duration"
+            name="duration"
+            >
+          <mat-hint>(em minutos)</mat-hint>
+  
+        </mat-form-field>
+  
+  
+        <mat-form-field appearance="fill">
+          <mat-label>E-mails para notificação</mat-label>
+          <textarea 
+            matInput
+            [(ngModel)]="config.emails"
+            name="emails"></textarea>
+          <mat-hint>(separados por vírgula)</mat-hint>
+        </mat-form-field>
+  
+        <mat-divider></mat-divider>
+  
+        <h3>Horários na semana</h3>
+  
+        <ng-container *ngFor="let w of config.week_hours; let i = index">
+          <app-week-hours [data]="w" [index]="i"></app-week-hours>
+        </ng-container>
+  
+  
+      </mat-card-content>
+      <mat-card-actions  align="end">
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          >Salvar</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
