@@ -2,8 +2,9 @@ import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatCalendar } from '@angular/material/datepicker';
 import * as moment from 'moment';
+import { BackendService } from '../backend.service';
 import { AvailableDates } from '../models/AvailableDates.model';
-import { Schedule, ScheduleEmpty } from '../models/Schedule.model';
+import { ScheduleData, ScheduleEmpty } from '../models/Schedule.model';
 
 @Component({
   selector: 'app-client-schedule',
@@ -18,21 +19,23 @@ export class ClientScheduleComponent {
   set selected(d:Date | null) {
     this._selected = d
     this.currentDateSlot = this.findDate(d)
-    this.selectedHourSlot = null
+    this.clean()
   }
 
   currentDateSlot:AvailableDates | null | undefined = null
   selectedHourSlot : string | null = null
-
-  schedule : Schedule = ScheduleEmpty()
+  schedule : ScheduleData = ScheduleEmpty()
+  scheduleSuccess: boolean = false
 
   availableDates: AvailableDates[] = [
-    {date: new Date("2022-12-21"), slots:["09:00", "10:30"]},
-    {date: new Date("2022-12-22"), slots:[]},
-    {date: new Date("2022-12-23"), slots:["14:00", "15:00", "16:00", "17:00"]}
+    {date: new Date("2023-01-03"), slots:["09:00", "10:30"]},
+    {date: new Date("2023-01-05"), slots:[]},
+    {date: new Date("2023-01-26"), slots:["14:00", "15:00", "16:00", "17:00"]}
   ]
 
   @ViewChild(MatCalendar) calendar: MatCalendar<Date> | undefined
+
+  constructor(private backend: BackendService) {}
 
   findDate(d: Date | null) : AvailableDates | undefined {
     const strDate = d?.toISOString().substring(0, 10)
@@ -69,14 +72,28 @@ export class ClientScheduleComponent {
   refresh() {
     //this.availableDates.pop()
     this.calendar?.updateTodaysDate()
+    this.clean()
   }
 
   cancel(f:NgForm) {
-    f.reset()
-    this.selectedHourSlot = null
+    f.resetForm()
+    this.clean()
   }
-  
+
+  clean() {
+    this.selectedHourSlot = null
+    this.schedule = ScheduleEmpty()
+    this.scheduleSuccess = false
+  }
+
   onSubmit(f: NgForm) {
-    console.log(this.schedule)
+    this.backend.schedule(this.schedule)
+      .then(success => {
+        this.scheduleSuccess = true
+      })
+      .catch(e => {
+        alert("Não foi possível realizar o agendamento. Recarregue a página e tente novamente.")
+        this.refresh()
+      })
   }
 }
