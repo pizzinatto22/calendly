@@ -4,7 +4,7 @@ import { MatCalendar } from '@angular/material/datepicker';
 import * as moment from 'moment';
 import { BackendService } from '../backend.service';
 import { AvailableDates } from '../models/AvailableDates.model';
-import { ScheduleData, ScheduleEmpty } from '../models/Schedule.model';
+import { ScheduleData, ScheduleEmpty } from '../models/ScheduleData.model';
 
 @Component({
   selector: 'app-client-schedule',
@@ -92,6 +92,7 @@ export class ClientScheduleComponent {
         this.scheduleSuccess = true
       })
       .catch(e => {
+        //TODO - Melhorar isso aqui.
         alert("Não foi possível realizar o agendamento. Recarregue a página e tente novamente.")
         this.refresh()
       })

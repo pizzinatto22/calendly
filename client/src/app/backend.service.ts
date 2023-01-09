@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ScheduleData } from './models/Schedule.model';
+import { ScheduleData } from './models/ScheduleData.model';
 import { UserEmpty, User } from './models/User.model';
 
 @Injectable({

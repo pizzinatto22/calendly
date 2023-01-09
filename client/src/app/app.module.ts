@@ -28,7 +28,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask, IConfig } from 'ngx-mask';
 import { ConfigComponent } from './admin/config/config.component';
-import { ScheduleComponent } from './admin/schedule/schedule.component';
+import { ScheduleListComponent } from './admin/schedule-list/schedule-list.component';
 import { ClientScheduleComponent } from './client-schedule/client-schedule.component'
 
 
@@ -42,7 +42,7 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     AdminComponent,
     WeekHoursComponent,
     ConfigComponent,
-    ScheduleComponent,
+    ScheduleListComponent,
     ClientScheduleComponent
   ],
   imports: [
