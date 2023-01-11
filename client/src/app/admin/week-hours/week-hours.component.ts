@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { ConfigStartEndTime } from 'src/app/models/Config.model';
 
 @Component({
@@ -30,7 +30,11 @@ export class WeekHoursComponent {
   }
 
   remove(t: ConfigStartEndTime) {
-    this.data = this.data.filter(e => e != t)
+    const index = this.data.indexOf(t)
+
+    if (index >= 0) {
+      this.data.splice(index, 1)
+    }
   }
 
 }

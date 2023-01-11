@@ -16,6 +16,7 @@
         [(ngModel)]="t.start"
         mask="00:00"
         [showMaskTyped]="true"
+        [dropSpecialCharacters]="false"
         >
 
       <mat-hint>HH:MM</mat-hint>
@@ -29,7 +30,7 @@
         [(ngModel)]="t.end"
         mask="00:00"
         [showMaskTyped]="true"
-
+        [dropSpecialCharacters]="false"
         >
       <mat-hint>HH:MM</mat-hint>
     </mat-form-field>

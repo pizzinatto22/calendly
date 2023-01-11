@@ -18,10 +18,10 @@ export const ConfigSchema = new Schema<IConfig>({
   end: {type: Date, required: true},
   duration: {type: Number, required: true},
   emails: String,
-  week_hours: [new Schema<IConfigStartEndTime>({
-    start: {type: String, required: true},
-    end: {type: String, required: true},
-  })]
+  week_hours: [[new Schema<IConfigStartEndTime>({
+    start: {type: String},
+    end: {type: String},
+  }, {_id: false})]]
 
 });
 

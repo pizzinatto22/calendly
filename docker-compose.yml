@@ -39,13 +39,13 @@ services:
       - 80:80
 #      - 443:443
   
-#  angular_server:
-#    image: node:16
-#    container_name: calendly_angular
-#    volumes:
-#      - ./client:/home/app
-#    working_dir: /home/app
-#    command: "sh run-dev.sh"
+  angular_server:
+    image: node:16
+    container_name: calendly_angular
+    volumes:
+      - ./client:/home/app
+    working_dir: /home/app
+    command: "sh run-dev.sh"
 
 
 

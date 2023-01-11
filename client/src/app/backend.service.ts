@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Config } from './models/Config.model';
 import { ScheduleData } from './models/ScheduleData.model';
 import { UserEmpty, User } from './models/User.model';
 
@@ -9,7 +11,7 @@ export class BackendService {
 
   private user: User = UserEmpty
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   registerUserData(user:User) {
     this.user  = user
@@ -27,5 +29,13 @@ export class BackendService {
         a(true)
       }, 2000);
     })
+  }
+
+  getConfig() {
+    return this.http.get<Config>("/api/config")
+  }
+
+  saveConfig (data: Config) {
+    return this.http.post("/api/config", data)
   }
 }

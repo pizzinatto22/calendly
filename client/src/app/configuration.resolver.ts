@@ -6,6 +6,7 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { BackendService } from './backend.service';
 
 import { Config, ConfigEmpty } from './models/Config.model';
 
@@ -13,7 +14,10 @@ import { Config, ConfigEmpty } from './models/Config.model';
   providedIn: 'root'
 })
 export class ConfigurationResolver implements Resolve<Config> {
+  constructor(private backend:BackendService) {}
+
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Config> | Promise<Config> | Config {
-    return ConfigEmpty()
+    return this.backend.getConfig()
   }
+
 }

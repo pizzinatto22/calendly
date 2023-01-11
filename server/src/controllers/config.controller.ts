@@ -12,15 +12,26 @@ export class ConfigController {
 
     const data:IConfig = req.body
 
+    console.log(data)
+
     let config = await ConfigModel.findOne()
-    
-    if (config) {
-      await config.overwrite(data)
-    } else {
-      config = new ConfigModel(data)
+    try {
+      if (config) {
+        config.overwrite(data)
+      } else {
+        config = new ConfigModel(data)
+      }
+      
       await config.save()
+
+      res.json(config)
+    } catch (e) {
+      console.log(e)
+      res.status(400).json({
+        error: "Error on saving config"
+      })
     }
     
-    res.json(config)
+    
   }
 }
